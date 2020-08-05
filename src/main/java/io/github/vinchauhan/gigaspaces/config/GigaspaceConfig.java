@@ -18,25 +18,27 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 public class GigaspaceConfig {
 
-        @Bean
-        @ConditionalOnProperty(prefix = "gigaspaces", name = "transmission", havingValue = "unicast")
-        GigaSpace configureXapUniCast(GigaspaceConfigProperties properties) {
-            log.info("Autoconfiguring Gigaspace for {}", "unicast");
-            log.info("Default SpaceUrl {}, set gigaspace.space-url property for custom url", properties.getSpaceUrl());
-            UrlSpaceConfigurer urlSpaceConfigurer = new UrlSpaceConfigurer(properties.getSpaceUrl());
-            urlSpaceConfigurer.lookupTimeout(20000);
-            GigaSpaceConfigurer gigaSpaceConfigurer = new GigaSpaceConfigurer(urlSpaceConfigurer);
-            return gigaSpaceConfigurer.gigaSpace();
-        }
+    @Bean
+    @ConditionalOnProperty(prefix = "gigaspaces", name = "transmission", havingValue = "unicast")
+    GigaSpace configureXapUniCast(GigaspaceConfigProperties properties) {
+        log.info("Autoconfiguring Gigaspace for {}", "unicast");
+        log.info("SpaceUrl {}, Set gigaspace.space-url property to provide the complete space url",
+                properties.getSpaceUrl());
+        UrlSpaceConfigurer urlSpaceConfigurer = new UrlSpaceConfigurer(properties.getSpaceUrl());
+        urlSpaceConfigurer.lookupTimeout(20000);
+        GigaSpaceConfigurer gigaSpaceConfigurer = new GigaSpaceConfigurer(urlSpaceConfigurer);
+        return gigaSpaceConfigurer.gigaSpace();
+    }
 
-        @Bean
-        @ConditionalOnProperty(prefix = "gigaspaces", name = "transmission", havingValue = "multicast")
-        GigaSpace configureXapMultiCast(GigaspaceConfigProperties properties) {
-            log.info("Autoconfiguring Gigaspace for {}", "multicast");
-            log.info("Default SpaceUrl {}, set gigaspace.space-url property for custom url", properties.getSpaceUrl());
-            UrlSpaceConfigurer urlSpaceConfigurer = new UrlSpaceConfigurer(properties.getSpaceUrl());
-            urlSpaceConfigurer.lookupTimeout(20000);
-            GigaSpaceConfigurer gigaSpaceConfigurer = new GigaSpaceConfigurer(urlSpaceConfigurer);
-            return gigaSpaceConfigurer.gigaSpace();
-        }
+    @Bean
+    @ConditionalOnProperty(prefix = "gigaspaces", name = "transmission", havingValue = "multicast")
+    GigaSpace configureXapMultiCast(GigaspaceConfigProperties properties) {
+        log.info("Autoconfiguring Gigaspace for {}", "multicast");
+        log.info("SpaceUrl {}, Set gigaspace.space-url property to provide the complete space url",
+                properties.getSpaceUrl());
+        UrlSpaceConfigurer urlSpaceConfigurer = new UrlSpaceConfigurer(properties.getSpaceUrl());
+        urlSpaceConfigurer.lookupTimeout(20000);
+        GigaSpaceConfigurer gigaSpaceConfigurer = new GigaSpaceConfigurer(urlSpaceConfigurer);
+        return gigaSpaceConfigurer.gigaSpace();
+    }
 }
